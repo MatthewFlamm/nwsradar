@@ -12,6 +12,7 @@ _LOGGER = logging.getLogger(__name__)
 
 CONF_FRAMES = 'frames'
 CONF_STATION = 'station'
+CONF_TYPE = 'type'
 
 MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=5)
 
@@ -19,7 +20,10 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_STATION): cv.string,
     vol.Optional(CONF_FRAMES): cv.positive_int,
     vol.Optional(CONF_NAME): cv.string,
+    vol.Optional(CONF_TYPE): cv.string,
 })
+
+RADARTYPES = ['NCR', 'N0R', 'N0S', 'N1P', 'NTP', 'N0Z']
 
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
@@ -27,17 +31,21 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     station = config[CONF_STATION]
     name = config.get(CONF_NAME) or config[CONF_STATION]
     frames = config.get(CONF_FRAMES) or 6
-    add_entities([NWSRadarCam(name, station, frames)])
-    
+    radartype = config.get(CONF_TYPE) or 'NCR'
+    if radartype not in RADARTYPES:
+        _LOGGER.error('invalid radar type')
+    add_entities([NWSRadarCam(name, radartype.upper(), station.upper(), frames)])
+
+
 class NWSRadarCam(Camera):
     """A camera component producing animated NWS radar GIFs."""
 
-    def __init__(self, name, station, frames):
+    def __init__(self, name, radartype, station, frames):
         """Initialize the component."""
         from nws_radar import Nws_Radar
         super().__init__()
         self._name = name
-        self._cam = Nws_Radar(station, 'NCR', nframes=frames)
+        self._cam = Nws_Radar(station, radartype, nframes=frames)
         self._image = None
 
     def camera_image(self):
