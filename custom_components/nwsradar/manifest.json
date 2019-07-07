@@ -1,6 +1,6 @@
 {
     "domain": "nwsradar",
-    "name": "National Weather Service",
+    "name": "National Weather Service Radar",
     "documentation": "https://www.home-assistant.io/components/nws",
     "dependencies": [],
     "codeowners": ["@MatthewFlamm"],
