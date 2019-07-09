@@ -48,9 +48,13 @@ class NWSRadarCam(Camera):
         self._cam = Nws_Radar(station, radartype, nframes=frames)
         self._image = None
 
+    @property
+    def should_poll(self):
+        return True
+    
     def camera_image(self):
         """Return the current NWS radar loop"""
-        self._update()
+        self.update()
         _LOGGER.debug("display image")
         return self._image
 
@@ -60,7 +64,7 @@ class NWSRadarCam(Camera):
         return self._name
 
     @Throttle(MIN_TIME_BETWEEN_UPDATES)
-    def _update(self):
+    def update(self):
         _LOGGER.debug("update image")
         self._cam.update()
         self._image = self._cam.image()
