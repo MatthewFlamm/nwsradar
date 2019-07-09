@@ -9,6 +9,8 @@ This custom integration can be installed and managed using HACS.
 
 If you want to manually isntall, place files in the `custom_components/nwsradar/` folder into `path/to/haconfig/custom_components/nwsradar/`
 
+There is a jpeg library dependency, `libjpeg-dev`, or similar, might need to be separately installed. See [here](https://community.home-assistant.io/t/nws-radar-images/118203/2) for report.
+
 Sample config:
 ```
 camera:
