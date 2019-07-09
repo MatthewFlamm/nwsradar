@@ -13,7 +13,7 @@ Sample config:
 ```
 camera:
   - platform: nwsradar
-  - station: VWX
+    station: VWX
 ```
 
 Different radar types can be displayed (Note all 0s are zeros):
@@ -27,24 +27,24 @@ Different radar types can be displayed (Note all 0s are zeros):
 ```
 camera:
   - platform: nwsradar
-  - station: VWX
-  - type: N0R
+    station: VWX
+    type: N0R
 ```
 
 Different length animations can be produced (default is 6):
  ```
 camera:
   - platform: nwsradar
-  - station: VWX
-  - frames: 8
+    station: VWX
+    frames: 8
 ```
 
 Entity name can be specified:
 ```
 camera:
   - platform: nwsradar
-  - station: VWX
-  - name: radarname
+    station: VWX
+    name: radarname
 ```
 
 Works with picture-entity card:
