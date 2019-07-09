@@ -2,6 +2,8 @@
 
 Custom component for short range NWS radar loops for Home Assistant.
 
+There is a jpeg library dependency, `libjpeg-dev`, or similar, might need to be separately installed.
+
 Sample config:
 ```
 camera:
