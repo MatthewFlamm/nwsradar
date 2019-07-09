@@ -6,7 +6,7 @@ Sample config:
 ```
 camera:
   - platform: nwsradar
-  - station: VWX
+    station: VWX
 ```
 
 Different radar types can be displayed (Note all 0s are zeros):
