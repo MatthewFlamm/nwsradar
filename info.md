@@ -11,6 +11,13 @@ camera:
     station: VWX
 ```
 
+See [README.md](README) for more info on configuration.
+
+## Change log
+* 0.3.0
+  * Add Standard style option
+  * BREAKING CHANGE: Default is now Standard style
+
 Different radar types can be displayed (Note all 0s are zeros):
 * NCR - Composite Reflectivity (default)
 * N0R - Base Reflectivity (out to 124 nm)

@@ -20,6 +20,11 @@ camera:
 
 ![radar](https://github.com/MatthewFlamm/nws_radar/blob/master/images/radar.gif?raw=True)
 
+## Change log
+* 0.3.0
+  * Add Standard style option
+  * BREAKING CHANGE: Default is now Standard style
+
 Different radar types can be displayed (Note all 0s are zeros):
 * NCR - Composite Reflectivity (default)
 * N0R - Base Reflectivity (out to 124 nm)
@@ -35,7 +40,16 @@ camera:
     type: N0R
 ```
 
-Different length animations can be produced (default is 6):
+The `Standard` radar style (the default) offers a simple white background and either a still picture (`frames: 1`) or a loop (any number larger than 1). Looping is the default.
+
+The 'Enhanced' radar style offers a topographical background and a configurable loop length.
+
+```
+    style: Standard
+```
+
+
+Different length animations can be produced (default is 6) for `Enhanced` style:
  ```
 camera:
   - platform: nwsradar
@@ -57,5 +71,3 @@ Works with picture-entity card:
 - type: picture-entity
   entity: camera.vwx
 ```
-
-
