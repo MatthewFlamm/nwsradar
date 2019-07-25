@@ -47,6 +47,9 @@ The `Standard` radar style (the default) offers a simple white background and ei
 The 'Enhanced' radar style offers a topographical background and a configurable loop length.
 
 ```
+camera:
+  - platform: nwsradar
+    station: VWX
     style: Standard
 ```
 
