@@ -4,19 +4,21 @@ Custom component for short range NWS radar loops for Home Assistant.
 
 There is a jpeg library dependency, `libjpeg-dev`, or similar, might need to be separately installed.
 
-Sample config:
+## Sample configuration
 ```
 camera:
   - platform: nwsradar
     station: VWX
 ```
 
-See [README.md](README) for more info on configuration.
+See [README](README.md) for more info on configuration.
 
 ## Change log
 * 0.3.0
   * Add Standard style option
   * BREAKING CHANGE: Default is now Standard style
+
+## Detailed configuration
 
 Different radar types can be displayed (Note all 0s are zeros):
 * NCR - Composite Reflectivity (default)

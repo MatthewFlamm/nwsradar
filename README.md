@@ -11,7 +11,7 @@ Radar stations can be found by clicking on this [map](https://radar.weather.gov/
 * If you want to manually install, place files in the `custom_components/nwsradar/` folder into `path/to/haconfig/custom_components/nwsradar/`
 * There is a jpeg library dependency, `libjpeg-dev`, or similar, might need to be separately installed. See [here](https://community.home-assistant.io/t/nws-radar-images/118203/2) for report.
 
-Sample config:
+## Sample configuration
 ```
 camera:
   - platform: nwsradar
@@ -24,6 +24,8 @@ camera:
 * 0.3.0
   * Add Standard style option
   * BREAKING CHANGE: Default is now Standard style
+
+## Detailed Configuration
 
 Different radar types can be displayed (Note all 0s are zeros):
 * NCR - Composite Reflectivity (default)
