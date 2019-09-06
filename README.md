@@ -9,11 +9,11 @@ Radar stations can be found by clicking on this [map](https://radar.weather.gov/
 
 * This custom integration can be installed and managed using HACS.
 * If you want to manually install, place files in the `custom_components/nwsradar/` folder into `path/to/haconfig/custom_components/nwsradar/`
-* :warning: There is a jpeg library dependency, `libjpeg-dev` or similar, that needs to be separately installed. See [here](https://community.home-assistant.io/t/nws-radar-images/118203/2) for report. If you see an error message like this in your log, you need to install the dependency:
-  * `ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory`
 
-
-There is a jpeg library dependency, `libjpeg-dev` or similar, might need to be separately installed. 
+### :warning: Required Dependencies for Installation
+There are system image library dependencies for the python Pillow package that may be required.  Here are some reported by users:
+* A jpeg library dependency, `libjpeg-dev`, `libjpeg-turbo` or similar, that needs to be separately installed via `sudo apt-get install libjpeg-turbo`. See [here](https://community.home-assistant.io/t/nws-radar-images/118203/2) for report. You will get an error message like this otherwise: `ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory`.
+* A tiff library dependency, `libtiff5` or similar, that needs to be separately installed via `sudo apt-get install libtiff5`. See [here](https://github.com/MatthewFlamm/nwsradar/issues/1) for report. You will get an error message like this otherwise: `ImportError: libtiff.so.5: cannot open shared object file: No such file or directory`.
 
 ## Sample configuration
 ```
