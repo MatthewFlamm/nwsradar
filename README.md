@@ -1,6 +1,6 @@
 # nwsradar
 
-Custom component for short range NWS radar loops for Home Assistant.
+Custom integration for short range NWS radar loops for Home Assistant.
 Radar stations can be found by clicking on this [map](https://radar.weather.gov/Conus/index_lite.php).
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/custom-components/hacs)
