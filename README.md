@@ -63,6 +63,7 @@ Different length animations can be produced (default is 6) for `Enhanced` style:
 camera:
   - platform: nwsradar
     station: VWX
+    style: Enhanced
     frames: 8
 ```
 
