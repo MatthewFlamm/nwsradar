@@ -2,7 +2,8 @@
 
 Custom component for short range NWS radar loops for Home Assistant.
 
-There is a jpeg library dependency, `libjpeg-dev`, or similar, might need to be separately installed.
+:warning: There is a jpeg library dependency, `libjpeg-dev` or similar, that needs to be separately installed if you see an error message like this in your log:
+* `ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory`
 
 ## Sample configuration
 ```
