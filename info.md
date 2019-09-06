@@ -2,8 +2,10 @@
 
 Custom component for short range NWS radar loops for Home Assistant.
 
-:warning: There is a jpeg library dependency, `libjpeg-dev` or similar, that needs to be separately installed if you see an error message like this in your log:
-* `ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory`
+### :warning: Required Dependencies
+There are system image library dependencies for the python Pillow package that may be required.  Here are some reported by users:
+* A jpeg library dependency, `libjpeg-dev`, `libjpeg-turbo` or similar, that needs to be separately installed via `sudo apt-get install libjpeg-turbo`. See [here](https://community.home-assistant.io/t/nws-radar-images/118203/2) for report. You will get an error message like this otherwise: `ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory`.
+* A tiff library dependency, `libtiff5` or similar, that needs to be separately installed via `sudo apt-get install libtiff5`. See [here](https://github.com/MatthewFlamm/nwsradar/issues/1) for report. You will get an error message like this otherwise: `ImportError: libtiff.so.5: cannot open shared object file: No such file or directory`.
 
 ## Sample configuration
 ```
