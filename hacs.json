@@ -1,0 +1,6 @@
+{
+  "name": "National Weather Service Radar",
+  "country": "US",
+  "domains": ["weather"],
+  "iot_class": "Cloud Polling"
+}
