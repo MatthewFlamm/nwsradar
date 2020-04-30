@@ -54,6 +54,21 @@ The 'Enhanced' radar style offers a topographical background and a configurable 
 
 The `Mosaic` radar style offers a longer range radar view of regions or the entire US.  Supported stations are:
 
+* NATAK
+* NATPR
+* NAT
+* CENTGRTLAKES
+* GREATLAKES
+* HAWAII
+* NORTHEAST
+* NORTHROCKIES
+* PACNORTHWEST
+* PACSOUTHWEST
+* SOUTHEAST
+* SOUTHMISSVLY
+* SOUTHPLAINS
+* SOUTHROCKIES
+* UPPERMISSVLY
 
 ```
 camera:
@@ -69,16 +84,16 @@ camera:
   - platform: nwsradar
     station: VWX
     style: Enhanced
-    frames: 8
+    frames: 8  # Optional
 ```
 
 Mosaic radar loops can be produced with configurable frame number, but radar type isnt supported:
- ```
+```
 camera:
   - platform: nwsradar
-    station: VWX
+    station: NAT
     style: Mosaic
-    frames: 8
+    frames: 8  # Optional
 ```
 
 Entity name can be specified:
