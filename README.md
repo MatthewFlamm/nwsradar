@@ -25,6 +25,8 @@ camera:
 ![radar](https://github.com/MatthewFlamm/nws_radar/blob/master/images/radar.gif?raw=True)
 
 ## Change log
+* 0.4.0
+  * Add Mosaic style option
 * 0.3.0
   * Add Standard style option
   * BREAKING CHANGE: Default is now Standard style
@@ -50,6 +52,9 @@ The `Standard` radar style (the default) offers a simple white background and ei
 
 The 'Enhanced' radar style offers a topographical background and a configurable loop length.
 
+The `Mosaic` radar style offers a longer range radar view of regions or the entire US.  Supported stations are:
+
+
 ```
 camera:
   - platform: nwsradar
@@ -64,6 +69,15 @@ camera:
   - platform: nwsradar
     station: VWX
     style: Enhanced
+    frames: 8
+```
+
+Mosaic radar loops can be produced with configurable frame number, but radar type isnt supported:
+ ```
+camera:
+  - platform: nwsradar
+    station: VWX
+    style: Mosaic
     frames: 8
 ```
 

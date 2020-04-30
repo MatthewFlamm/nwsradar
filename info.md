@@ -17,13 +17,15 @@ camera:
 See [README](README.md) for more info on configuration.
 
 ## Change log
+* 0.4.0
+  * Add Mosaic style option
 * 0.3.0
   * Add Standard style option
   * BREAKING CHANGE: Default is now Standard style
 
 ## Detailed configuration
 
-Different radar types can be displayed (Note all 0s are zeros):
+Different radar types can be displayed (Note all 0s are zeros). Mosaic style does not support this.
 * NCR - Composite Reflectivity (default)
 * N0R - Base Reflectivity (out to 124 nm)
 * N0Z - Base Reflectivity (out to 248 nm)
