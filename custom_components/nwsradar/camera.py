@@ -86,5 +86,4 @@ class NWSRadarCam(Camera):
     def update(self):
         _LOGGER.debug("update image")
         self._cam.update()
-        _LOGGER.debug(self._cam._files)
         self._image = self._cam.image()
