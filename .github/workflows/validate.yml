@@ -16,5 +16,5 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CATEGORY: "integration"
-        evn:
+        env:
           SKIP_BRANDS_CHECK: "True"
