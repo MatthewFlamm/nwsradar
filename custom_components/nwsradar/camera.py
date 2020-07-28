@@ -6,47 +6,29 @@ import voluptuous as vol
 from nws_radar import Nws_Radar, Nws_Radar_Lite, Nws_Radar_Mosaic
 from nws_radar.nws_radar_mosaic import REGIONS
 
-from homeassistant.components.camera import PLATFORM_SCHEMA, Camera
-from homeassistant.const import CONF_NAME
+from homeassistant.components.camera import Camera, PLATFORM_SCHEMA
 from homeassistant.helpers import config_validation as cv
 from homeassistant.util import Throttle
 
+from . import unique_id
+from .const import CONF_STATION, CONF_TYPE, CONF_LOOP, CONF_STYLE, RADAR_TYPES
 
 _LOGGER = logging.getLogger(__name__)
 
-CONF_FRAMES = 'frames'
-CONF_STATION = 'station'
-CONF_TYPE = 'type'
-CONF_STYLE = 'style'
-
-
 MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=5)
 
-RADARTYPES = ['NCR', 'N0R', 'N0S', 'N1P', 'NTP', 'N0Z']
-STYLES = ['Standard', 'Enhanced', 'Mosaic']
 
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    vol.Required(CONF_STATION): cv.string,
-    vol.Optional(CONF_STYLE, default='Standard'): vol.In(STYLES),
-    vol.Optional(CONF_FRAMES): cv.positive_int,
-    vol.Optional(CONF_NAME): cv.string,
-    vol.Optional(CONF_TYPE, default='NCR'): vol.In(RADARTYPES),
-})
-
-
-def setup_platform(hass, config, add_entities, discovery_info=None):
-    """Set up NWS radar-loop camera component."""
-    station = config[CONF_STATION]
-    style = config.get(CONF_STYLE) or 'Standard'
-    name = config.get(CONF_NAME) or config[CONF_STATION]
-    frames = config.get(CONF_FRAMES) or 6
-    radartype = config.get(CONF_TYPE) or 'NCR'
-    if radartype not in RADARTYPES:
-        _LOGGER.error('invalid radar type')
-    if style == 'Mosaic':
-        if station.upper() not in REGIONS:
-            _LOGGER.error(f"station {station} not in {REGIONS}")
-    add_entities([NWSRadarCam(name, radartype.upper(), station.upper(), frames, style)])
+async def async_setup_entry(hass, entry, async_add_entities):
+    """Set up the nwsradar camera platform."""
+    station = entry.data[CONF_STATION]
+    style = entry.data[CONF_STYLE]
+    frames = 6 if entry.data[CONF_LOOP] else 1
+    if entry.data[CONF_TYPE]:
+        radartype = RADAR_TYPES[entry.data[CONF_TYPE]]
+    else:
+        radartype = ""
+    name = f"{unique_id(entry.data)}"
+    async_add_entities([NWSRadarCam(name, radartype.upper(), station.upper(), frames, style)])
 
 
 class NWSRadarCam(Camera):
@@ -56,6 +38,7 @@ class NWSRadarCam(Camera):
         """Initialize the component."""
         super().__init__()
         self._name = name
+        self._unique_id = name
         if style == 'Enhanced':
             self._cam = Nws_Radar(station, radartype, nframes=frames)
         elif style == 'Standard':
@@ -82,6 +65,11 @@ class NWSRadarCam(Camera):
         """Return the component name."""
         return self._name
 
+    @property
+    def unique_id(self):
+        """Return unique_id."""
+        return self._unique_id
+    
     @Throttle(MIN_TIME_BETWEEN_UPDATES)
     def update(self):
         _LOGGER.debug("update image")

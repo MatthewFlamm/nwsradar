@@ -1,0 +1,38 @@
+{
+    "title": "NWS Radar",
+    "config": {
+	"step": {
+	    "user": {
+		"description": "Enhanced and standard are short range loops. Standard has a white background. Enhanced has a topo background and configurable loop length. Mosaic is for regions or whole US.",
+		"title": "Choose style of radar",
+		"data": {
+		    "style": "Style"
+		}
+	    },
+	    "standard_enhanced": {
+		"description": "Configure a station and radar type. Choose radar loops or static images.",
+		"title": "Configure NWS Radar",
+		"data": {
+		    "loop": "Loop",
+		    "station": "Station",
+		    "type": "Type"
+		}
+	    },
+	    "mosaic": {
+		"description": "Configure a station. Choose radar loops or static images.",
+		"title": "Configure NWS Radar",
+		"data": {
+		    "loop": "Loop",
+		    "station": "Station"
+		}
+	    }
+
+	},
+	"error": {
+	    "unknown": "Unexpected error"
+	},
+	"abort": {
+	    "already_configured": "Device is already configured"
+	}
+    }
+}
