@@ -4,6 +4,7 @@ CONF_STYLE = "style"
 CONF_STATION = "station"
 CONF_LOOP = "loop"
 CONF_TYPE = "type"
+CONF_NAME = "name"
 
 STYLES = ["Standard", "Enhanced", "Mosaic"]
 

@@ -12,7 +12,7 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from . import unique_id
-from .const import CONF_LOOP, CONF_STATION, CONF_STYLE, STYLES, CONF_TYPE, DOMAIN, RADAR_TYPES, DEFAULT_RADAR_TYPE  # pylint:disable=unused-import
+from .const import CONF_LOOP, CONF_STATION, CONF_STYLE, STYLES, CONF_TYPE, DOMAIN, RADAR_TYPES, DEFAULT_RADAR_TYPE, CONF_NAME  # pylint:disable=unused-import
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -43,7 +43,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             self._config.update(user_input)
             self._config[CONF_STATION] = self._config[CONF_STATION].upper()
             title = unique_id(self._config)
-            
+            self._config[CONF_NAME] = None
+
             await self.async_set_unique_id(unique_id(self._config))
             self._abort_if_unique_id_configured()
             
@@ -64,6 +65,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             self._config.update(user_input)
             self._config[CONF_TYPE] = ""
+            self._config[CONF_NAME] = None
             title = unique_id(self._config)
             await self.async_set_unique_id(title)
             self._abort_if_unique_id_configured()
@@ -77,3 +79,11 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="mosaic", data_schema=data_schema, errors=errors
         )
+
+    async def async_step_import(self, user_input=None):
+        """Import an entry from yaml."""
+        title = unique_id(user_input)
+        await self.async_set_unique_id(title)
+        self._abort_if_unique_id_configured()
+
+        return self.async_create_entry(title=title, data=user_input)
