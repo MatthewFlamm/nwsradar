@@ -1,16 +1,16 @@
 {
-    "title": "NWS Radar",
+    "title": "National Weather Service (NWS) Radar",
     "config": {
 	"step": {
 	    "user": {
 		"description": "Enhanced and standard are short range loops. Standard has a white background. Enhanced has a topo background and configurable loop length. Mosaic is for regions or whole US.",
-		"title": "Choose style of radar",
+		"title": "NWS radar. Choose style of radar",
 		"data": {
 		    "style": "Style"
 		}
 	    },
 	    "standard_enhanced": {
-		"description": "Configure a station and radar type. Choose radar loops or static images.",
+		"description": "Use https://radar.weather.gov/ to find a nearby station. https://www.weather.gov/iwx/wsr_88d#diff explains some of the radar image types",
 		"title": "Configure NWS Radar",
 		"data": {
 		    "loop": "Loop",
@@ -19,14 +19,13 @@
 		}
 	    },
 	    "mosaic": {
-		"description": "Configure a station. Choose radar loops or static images.",
+		"description": "Choose station. There is no choice of radar type for Mosaic images.",
 		"title": "Configure NWS Radar",
 		"data": {
 		    "loop": "Loop",
 		    "station": "Station"
 		}
 	    }
-
 	},
 	"error": {
 	    "unknown": "Unexpected error"
