@@ -31,7 +31,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
     """Set up NWS radar-loop camera component."""
-    _LOGGER.warning("YAML configuration deprecated. It will be removed in nwsradar v0.7.0")
+    _LOGGER.warning("YAML configuration deprecated. It will be removed in nwsradar v0.6.0")
     station= config[CONF_STATION].upper()
     style = config.get(CONF_STYLE) or 'Standard'
     name = config.get(CONF_NAME) or config[CONF_STATION]
