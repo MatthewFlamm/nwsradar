@@ -17,3 +17,6 @@ RADAR_TYPES = {
     "Storm Total Precipitation": "NTP",
 }
 DEFAULT_RADAR_TYPE = "Composite Reflectivity"
+
+DATA_COORDINATOR = "coordinator"
+DATA_CAM = "cam"
