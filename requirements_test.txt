@@ -1,1 +1,1 @@
-pytest-homeassistant-custtom-component
+pytest-homeassistant-custom-component
