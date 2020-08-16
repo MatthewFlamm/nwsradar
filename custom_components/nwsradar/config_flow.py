@@ -2,7 +2,6 @@
 import logging
 
 import aiohttp
-from pynws import SimpleNWS
 import voluptuous as vol
 from nws_radar import RADARS
 from nws_radar.nws_radar_mosaic import REGIONS
