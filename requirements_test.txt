@@ -1,1 +1,2 @@
 pytest-homeassistant-custom-component
+nws_radar==0.3.2
