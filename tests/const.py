@@ -5,3 +5,17 @@ NWSRADAR_CONFIG = {
     "station": "ABC",
     "loop": True,
 }
+
+NWSRADAR_CONFIG_ENHANCED = {
+    "type": "Composite Reflectivity",
+    "style": "Enhanced",
+    "station": "ABC",
+    "loop": True,
+}
+
+NWSRADAR_CONFIG_MOSAIC = {
+    "type": "",
+    "style": "Mosaic",
+    "station": "ABC",
+    "loop": True,
+}
