@@ -7,6 +7,7 @@ from nws_radar.nws_radar_mosaic import REGIONS
 from homeassistant import config_entries
 
 from . import unique_id
+# pylint: disable=unused-import
 from .const import (
     CONF_LOOP,
     CONF_STATION,
@@ -16,7 +17,8 @@ from .const import (
     RADAR_TYPES,
     DEFAULT_RADAR_TYPE,
     CONF_NAME,
-)  # pylint:disable=unused-import
+    DOMAIN,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -31,7 +33,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Handle the initial step."""
         errors = {}
         if user_input is not None:
-            self._config = user_input  # pylint:disable=attribute-defined-outside-init
+            self._config = user_input  # pylint: disable=attribute-defined-outside-init
             if user_input[CONF_STYLE] in {"Standard", "Enhanced"}:
                 return await self.async_step_standard_enhanced()
             # Mosaic
