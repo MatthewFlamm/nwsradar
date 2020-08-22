@@ -1,5 +1,7 @@
 from unittest.mock import Mock
+from homeassistant import config_entries
 from homeassistant.components import camera
+from homeassistant.setup import async_setup_component
 from pytest_homeassistant_custom_component.common import MockConfigEntry, async_fire_time_changed
 
 from custom_components.nwsradar.const import DOMAIN
@@ -70,3 +72,20 @@ async def test_camera_mosaic(hass, mock_nwsradar_mosaic):
 
     instance.image.assert_called_once()
     instance.update.assert_called_once()
+
+async def test_import(hass, mock_nwsradar):
+
+    config = {
+        "camera": {
+            "platform": "nwsradar",
+            "station": "ABC"
+        }
+    }
+    
+    await async_setup_component(hass, "camera", config)
+    await hass.async_block_till_done()
+
+    state = hass.states.get("camera.abc")
+    
+    assert state
+    assert state.state == "idle"

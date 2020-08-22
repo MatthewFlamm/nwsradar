@@ -15,17 +15,15 @@ DEFAULT_SCAN_INTERVAL = datetime.timedelta(minutes=10)
 def unique_id(config):
     name = f"{config[CONF_STATION]} {config[CONF_STYLE]} {config[CONF_TYPE]}"
     loop = config[CONF_LOOP]
-    if isinstance(loop, bool):
-        if loop:
-            return f"{name} Loop"
-        return name
-    if loop > 1:
+    if loop:
         return f"{name} Loop"
     return name
+
 
 async def async_setup(hass: HomeAssistant, config: dict):
     """Set up nwsradar integration."""
     return True
+
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     """Set up a National Weather Service entry."""

@@ -45,7 +45,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
 
     if style == 'Mosaic':
         if station not in REGIONS:
-            _LOGGER.error(f"station {station} not 8in {REGIONS}")
+            _LOGGER.error(f"station {station} not in {REGIONS}")
 
     entry_data = {
         CONF_STATION: station,
