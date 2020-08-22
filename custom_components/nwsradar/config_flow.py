@@ -7,6 +7,7 @@ from nws_radar.nws_radar_mosaic import REGIONS
 from homeassistant import config_entries
 
 from . import unique_id
+
 # pylint: disable=unused-import
 from .const import (
     CONF_LOOP,
