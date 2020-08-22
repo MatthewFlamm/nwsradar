@@ -1,3 +1,4 @@
+"""Constants for NWS Radar integration."""
 DOMAIN = "nwsradar"
 
 CONF_STYLE = "style"

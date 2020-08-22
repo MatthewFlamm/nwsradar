@@ -49,7 +49,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     style = config.get(CONF_STYLE) or "Standard"
     name = config.get(CONF_NAME) or config[CONF_STATION]
     frames = config.get(CONF_FRAMES) or 6
-    loop = True if frames > 1 else False
+    loop = frames > 1
 
     radartype = config.get(CONF_TYPE) or "NCR"
     if radartype not in RADAR_TYPES.values():
@@ -58,7 +58,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
 
     if style == "Mosaic":
         if station not in REGIONS:
-            _LOGGER.error(f"station {station} not in {REGIONS}")
+            _LOGGER.error("station {station} not in %s", REGIONS)
 
     entry_data = {
         CONF_STATION: station,
@@ -102,11 +102,11 @@ async def async_setup_entry(hass, entry, async_add_entities):
 class NWSRadarCam(Camera):
     """A camera component producing animated NWS radar GIFs."""
 
-    def __init__(self, unique_id, radartype, station, frames, style, name):
+    def __init__(self, id_unique, radartype, station, frames, style, name):
         """Initialize the component."""
         super().__init__()
         self._name = name
-        self._unique_id = unique_id
+        self._unique_id = id_unique
         if style == "Enhanced":
             self._cam = Nws_Radar(station, radartype, nframes=frames)
         elif style == "Standard":
@@ -120,6 +120,7 @@ class NWSRadarCam(Camera):
 
     @property
     def should_poll(self):
+        """Whether to poll."""
         return True
 
     def camera_image(self):
@@ -140,6 +141,7 @@ class NWSRadarCam(Camera):
 
     @Throttle(MIN_TIME_BETWEEN_UPDATES)
     def update(self):
+        """Update data."""
         _LOGGER.debug("update image")
         self._cam.update()
         self._image = self._cam.image()

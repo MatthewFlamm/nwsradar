@@ -1,3 +1,4 @@
+"""National Weather Service Radar integration."""
 import asyncio
 import datetime
 import logging
@@ -14,6 +15,7 @@ DEFAULT_SCAN_INTERVAL = datetime.timedelta(minutes=10)
 
 
 def unique_id(config):
+    """Return unique_id from config."""
     name = f"{config[CONF_STATION]} {config[CONF_STYLE]} {config[CONF_TYPE]}"
     loop = config[CONF_LOOP]
     if loop:
