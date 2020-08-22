@@ -34,7 +34,10 @@ async def test_no_loop(hass, mock_nwsradar_lite):
     await hass.async_block_till_done()
 
     assert len(hass.states.async_entity_ids(CAMERA_DOMAIN)) == 1
-    assert hass.states.async_entity_ids(CAMERA_DOMAIN)[0] == "camera.abc_standard_composite_reflectivity"
+    assert (
+        hass.states.async_entity_ids(CAMERA_DOMAIN)[0]
+        == "camera.abc_standard_composite_reflectivity"
+    )
 
 
 async def test_enhanced(hass, mock_nwsradar):
@@ -48,7 +51,10 @@ async def test_enhanced(hass, mock_nwsradar):
     await hass.async_block_till_done()
 
     assert len(hass.states.async_entity_ids(CAMERA_DOMAIN)) == 1
-    assert hass.states.async_entity_ids(CAMERA_DOMAIN)[0] == "camera.abc_enhanced_composite_reflectivity_loop"
+    assert (
+        hass.states.async_entity_ids(CAMERA_DOMAIN)[0]
+        == "camera.abc_enhanced_composite_reflectivity_loop"
+    )
 
 
 async def test_mosaic(hass, mock_nwsradar_mosaic):

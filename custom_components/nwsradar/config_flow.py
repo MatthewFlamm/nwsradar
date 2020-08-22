@@ -11,7 +11,17 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from . import unique_id
-from .const import CONF_LOOP, CONF_STATION, CONF_STYLE, STYLES, CONF_TYPE, DOMAIN, RADAR_TYPES, DEFAULT_RADAR_TYPE, CONF_NAME  # pylint:disable=unused-import
+from .const import (
+    CONF_LOOP,
+    CONF_STATION,
+    CONF_STYLE,
+    STYLES,
+    CONF_TYPE,
+    DOMAIN,
+    RADAR_TYPES,
+    DEFAULT_RADAR_TYPE,
+    CONF_NAME,
+)  # pylint:disable=unused-import
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -46,13 +56,15 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
             await self.async_set_unique_id(unique_id(self._config))
             self._abort_if_unique_id_configured()
-            
+
             return self.async_create_entry(title=title, data=self._config)
         data_schema = vol.Schema(
             {
                 vol.Required(CONF_STATION): str,
                 vol.Required(CONF_LOOP, default=True): bool,
-                vol.Required(CONF_TYPE, default=DEFAULT_RADAR_TYPE): vol.In(RADAR_TYPES.keys()),
+                vol.Required(CONF_TYPE, default=DEFAULT_RADAR_TYPE): vol.In(
+                    RADAR_TYPES.keys()
+                ),
             }
         )
         return self.async_show_form(

@@ -2,11 +2,19 @@ from unittest.mock import Mock
 from homeassistant import config_entries
 from homeassistant.components import camera
 from homeassistant.setup import async_setup_component
-from pytest_homeassistant_custom_component.common import MockConfigEntry, async_fire_time_changed
+from pytest_homeassistant_custom_component.common import (
+    MockConfigEntry,
+    async_fire_time_changed,
+)
 
 from custom_components.nwsradar.const import DOMAIN
 
-from tests.const import NWSRADAR_CONFIG, NWSRADAR_CONFIG_ENHANCED, NWSRADAR_CONFIG_MOSAIC
+from tests.const import (
+    NWSRADAR_CONFIG,
+    NWSRADAR_CONFIG_ENHANCED,
+    NWSRADAR_CONFIG_MOSAIC,
+)
+
 
 async def test_camera(hass, mock_nwsradar_lite):
 
@@ -23,7 +31,9 @@ async def test_camera(hass, mock_nwsradar_lite):
 
     assert state
     assert state.state == "idle"
-    image = await camera.async_get_image(hass, "camera.abc_standard_composite_reflectivity_loop")
+    image = await camera.async_get_image(
+        hass, "camera.abc_standard_composite_reflectivity_loop"
+    )
     assert image.content == b"Test"
 
     instance.image.assert_called_once()
@@ -45,7 +55,9 @@ async def test_camera_enhanced(hass, mock_nwsradar):
 
     assert state
     assert state.state == "idle"
-    image = await camera.async_get_image(hass, "camera.abc_enhanced_composite_reflectivity_loop")
+    image = await camera.async_get_image(
+        hass, "camera.abc_enhanced_composite_reflectivity_loop"
+    )
     assert image.content == b"Test"
 
     instance.image.assert_called_once()
@@ -73,19 +85,15 @@ async def test_camera_mosaic(hass, mock_nwsradar_mosaic):
     instance.image.assert_called_once()
     instance.update.assert_called_once()
 
+
 async def test_import(hass, mock_nwsradar):
 
-    config = {
-        "camera": {
-            "platform": "nwsradar",
-            "station": "ABC"
-        }
-    }
-    
+    config = {"camera": {"platform": "nwsradar", "station": "ABC"}}
+
     await async_setup_component(hass, "camera", config)
     await hass.async_block_till_done()
 
     state = hass.states.get("camera.abc")
-    
+
     assert state
     assert state.state == "idle"

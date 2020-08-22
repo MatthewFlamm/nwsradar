@@ -12,6 +12,7 @@ _LOGGER = logging.getLogger(__name__)
 PLATFORMS = ["camera"]
 DEFAULT_SCAN_INTERVAL = datetime.timedelta(minutes=10)
 
+
 def unique_id(config):
     name = f"{config[CONF_STATION]} {config[CONF_STYLE]} {config[CONF_TYPE]}"
     loop = config[CONF_LOOP]

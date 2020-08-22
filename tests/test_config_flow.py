@@ -12,12 +12,9 @@ from custom_components.nwsradar.const import DOMAIN
     "input_1,step_id_2,input_2,title,data",
     [
         (
-            "Standard", "standard_enhanced",
-            {
-                "type": "Composite Reflectivity",
-                "loop": True,
-                "station": "ABC"
-            },
+            "Standard",
+            "standard_enhanced",
+            {"type": "Composite Reflectivity", "loop": True, "station": "ABC"},
             "ABC Standard Composite Reflectivity Loop",
             {
                 "type": "Composite Reflectivity",
@@ -30,11 +27,7 @@ from custom_components.nwsradar.const import DOMAIN
         (
             "Enhanced",
             "standard_enhanced",
-            {
-                "type": "Composite Reflectivity",
-                "loop": True,
-                "station": "ABC"
-            },
+            {"type": "Composite Reflectivity", "loop": True, "station": "ABC"},
             "ABC Enhanced Composite Reflectivity Loop",
             {
                 "type": "Composite Reflectivity",
@@ -43,15 +36,11 @@ from custom_components.nwsradar.const import DOMAIN
                 "station": "ABC",
                 "name": None,
             },
-
         ),
         (
             "Mosaic",
             "mosaic",
-            {
-                "loop": True,
-                "station": "NAT"
-            },
+            {"loop": True, "station": "NAT"},
             "NAT Mosaic  Loop",  # extra space since no type isnt handled well
             {
                 "type": "",
@@ -61,7 +50,7 @@ from custom_components.nwsradar.const import DOMAIN
                 "name": None,
             },
         ),
-    ]
+    ],
 )
 async def test_form(input_1, step_id_2, input_2, title, data, hass):
     """Test we get the form."""
@@ -71,7 +60,6 @@ async def test_form(input_1, step_id_2, input_2, title, data, hass):
     )
     assert result["type"] == "form"
     assert result["errors"] == {}
-
 
     with patch(
         "custom_components.nwsradar.async_setup", return_value=True
@@ -85,13 +73,13 @@ async def test_form(input_1, step_id_2, input_2, title, data, hass):
         assert result2["step_id"] == step_id_2
 
         result3 = await hass.config_entries.flow.async_configure(
-            result["flow_id"], input_2 
+            result["flow_id"], input_2
         )
 
     assert result3["type"] == "create_entry"
     assert result3["title"] == title
     assert result3["data"] == data
-    
+
     await hass.async_block_till_done()
     assert len(mock_setup.mock_calls) == 1
     assert len(mock_setup_entry.mock_calls) == 1
