@@ -49,13 +49,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     station = entry.data[CONF_STATION]
     style = entry.data[CONF_STYLE]
     loop = entry.data[CONF_LOOP]
-    radartype = RADAR_TYPES[entry.data[CONF_TYPE]]
 
     frames = 6 if loop else 1
 
     if style == "Enhanced":
+        radartype = RADAR_TYPES[entry.data[CONF_TYPE]]
         cam = Nws_Radar(station, radartype, nframes=frames)
     elif style == "Standard":
+        radartype = RADAR_TYPES[entry.data[CONF_TYPE]]
         cam = Nws_Radar_Lite(station, radartype, loop)
     elif style == "Mosaic":
         cam = Nws_Radar_Mosaic(station, nframes=frames)
