@@ -3,13 +3,11 @@ from datetime import timedelta
 import logging
 import voluptuous as vol
 
-from nws_radar import Nws_Radar, Nws_Radar_Lite, Nws_Radar_Mosaic
 from nws_radar.nws_radar_mosaic import REGIONS
 
 from homeassistant.components.camera import Camera, PLATFORM_SCHEMA
 from homeassistant.config_entries import SOURCE_IMPORT
 from homeassistant.helpers import config_validation as cv
-from homeassistant.util import Throttle
 
 from . import unique_id
 from .const import (
@@ -21,6 +19,8 @@ from .const import (
     CONF_NAME,
     STYLES,
     DOMAIN,
+    DATA_COORDINATOR,
+    DATA_CAM,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -77,57 +77,32 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
 
 async def async_setup_entry(hass, entry, async_add_entities):
     """Set up the nwsradar camera platform."""
-    station = entry.data[CONF_STATION]
-    style = entry.data[CONF_STYLE]
-    frames = 6 if entry.data[CONF_LOOP] else 1
-    if entry.data[CONF_TYPE]:
-        radartype = RADAR_TYPES[entry.data[CONF_TYPE]]
-    else:
-        radartype = ""
     name = entry.data.get(CONF_NAME, unique_id(entry.data))
-    async_add_entities(
-        [
-            NWSRadarCam(
-                unique_id(entry.data),
-                radartype.upper(),
-                station.upper(),
-                frames,
-                style,
-                name,
-            )
-        ]
-    )
+
+    coordinator = hass.data[DOMAIN][entry.entry_id][DATA_COORDINATOR]
+    cam = hass.data[DOMAIN][entry.entry_id][DATA_CAM]
+    async_add_entities([NWSRadarCam(unique_id(entry.data), name, coordinator, cam)])
 
 
 class NWSRadarCam(Camera):
     """A camera component producing animated NWS radar GIFs."""
 
-    def __init__(self, id_unique, radartype, station, frames, style, name):
+    def __init__(self, id_unique, name, coordinator, cam):
         """Initialize the component."""
         super().__init__()
         self._name = name
         self._unique_id = id_unique
-        if style == "Enhanced":
-            self._cam = Nws_Radar(station, radartype, nframes=frames)
-        elif style == "Standard":
-            if frames == 1:
-                self._cam = Nws_Radar_Lite(station, radartype, loop=False)
-            else:
-                self._cam = Nws_Radar_Lite(station, radartype, loop=True)
-        elif style == "Mosaic":
-            self._cam = Nws_Radar_Mosaic(station, nframes=frames)
-        self._image = None
+        self._cam = cam
+        self._coordinator = coordinator
 
     @property
     def should_poll(self):
-        """Whether to poll."""
-        return True
+        return False
 
     def camera_image(self):
         """Return the current NWS radar loop"""
-        self.update()
         _LOGGER.debug("display image")
-        return self._image
+        return self._cam.image()
 
     @property
     def name(self):
@@ -139,9 +114,17 @@ class NWSRadarCam(Camera):
         """Return unique_id."""
         return self._unique_id
 
-    @Throttle(MIN_TIME_BETWEEN_UPDATES)
-    def update(self):
-        """Update data."""
-        _LOGGER.debug("update image")
-        self._cam.update()
-        self._image = self._cam.image()
+    @property
+    def available(self):
+        """Return availabilty of data."""
+        return self._coordinator.last_update_success
+
+    async def async_update(self):
+        """Manual update entity."""
+        await self._coordinator.async_request_refresh()
+
+    async def async_added_to_hass(self):
+        """When entity is added to hass."""
+        self.async_on_remove(
+            self._coordinator.async_add_listener(self.async_write_ha_state)
+        )
