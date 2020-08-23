@@ -3,13 +3,11 @@ from datetime import timedelta
 import logging
 import voluptuous as vol
 
-from nws_radar import Nws_Radar, Nws_Radar_Lite, Nws_Radar_Mosaic
 from nws_radar.nws_radar_mosaic import REGIONS
 
 from homeassistant.components.camera import Camera, PLATFORM_SCHEMA
 from homeassistant.config_entries import SOURCE_IMPORT
 from homeassistant.helpers import config_validation as cv
-from homeassistant.util import Throttle
 
 from . import unique_id
 from .const import (
@@ -89,11 +87,11 @@ async def async_setup_entry(hass, entry, async_add_entities):
 class NWSRadarCam(Camera):
     """A camera component producing animated NWS radar GIFs."""
 
-    def __init__(self, unique_id, name, coordinator, cam):
+    def __init__(self, id_unique, name, coordinator, cam):
         """Initialize the component."""
         super().__init__()
         self._name = name
-        self._unique_id = unique_id
+        self._unique_id = id_unique
         self._cam = cam
         self._coordinator = coordinator
 
