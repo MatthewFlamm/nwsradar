@@ -100,7 +100,7 @@ class NWSRadarCam(Camera):
     @property
     def should_poll(self):
         return False
-    
+
     def camera_image(self):
         """Return the current NWS radar loop"""
         _LOGGER.debug("display image")
@@ -128,7 +128,5 @@ class NWSRadarCam(Camera):
     async def async_added_to_hass(self):
         """When entity is added to hass."""
         self.async_on_remove(
-            self._coordinator.async_add_listener(
-                self.async_write_ha_state
-            )
+            self._coordinator.async_add_listener(self.async_write_ha_state)
         )
