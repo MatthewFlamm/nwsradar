@@ -1,3 +1,4 @@
+"""Constants for NWS Radar integration."""
 DOMAIN = "nwsradar"
 
 CONF_STYLE = "style"
@@ -9,7 +10,7 @@ CONF_NAME = "name"
 STYLES = ["Standard", "Enhanced", "Mosaic"]
 
 RADAR_TYPES = {
-    "Composite Reflectivity": 'NCR',
+    "Composite Reflectivity": "NCR",
     "Base Reflectivity 124 nm": "N0R",
     "Base Reflectivity 248 nm": "N0Z",
     "Storm Relative Motion": "N0S",
