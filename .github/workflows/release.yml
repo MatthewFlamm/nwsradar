@@ -1,3 +1,5 @@
+# Modified from the hacs/integration repository
+
 name: Release
 
 on:
