@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release_zip_file:
+    name: Prepare release asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v1
+
+      # Pack the HACS dir as a zip and upload to the release
+      - name: ZIP HACS Dir
+        run: |
+          cd /home/runner/work/nwsradar/custom_components/nwsradar
+          zip nwsradar.zip -r ./
+
+      - name: Upload zip to release
+        uses: svenstaro/upload-release-action@v1-release
+
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: /home/runner/work/nwsradar/custom_components/nwsradar/nwsradar.zip
+          asset_name: nwsradar.zip
+          tag: ${{ github.ref }}
+          overwrite: true
