@@ -28,6 +28,8 @@ Works with picture-entity card:
 ```
 
 ## Change log
+* 0.5.1
+  * Use standard homeassistant method for updating data
 * 0.5.0
   * Use UI configuration
   * DEPRECATION: YAML configuration to be removed in 0.6.0
