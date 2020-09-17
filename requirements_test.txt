@@ -1,4 +1,4 @@
 pytest-homeassistant-custom-component
 nws_radar==0.3.2
 aiohttp_cors
-black
+black==20.8b1

@@ -8,7 +8,10 @@ from tests.const import NWSRADAR_CONFIG
 
 async def test_unload_entry(hass, mock_nwsradar_lite):
     """Test that nws setup with config yaml."""
-    entry = MockConfigEntry(domain=DOMAIN, data=NWSRADAR_CONFIG,)
+    entry = MockConfigEntry(
+        domain=DOMAIN,
+        data=NWSRADAR_CONFIG,
+    )
     entry.add_to_hass(hass)
 
     await hass.config_entries.async_setup(entry.entry_id)
@@ -27,7 +30,10 @@ async def test_no_loop(hass, mock_nwsradar_lite):
     """Test that nws setup with config yaml."""
     data = NWSRADAR_CONFIG.copy()
     data[CONF_LOOP] = False
-    entry = MockConfigEntry(domain=DOMAIN, data=data,)
+    entry = MockConfigEntry(
+        domain=DOMAIN,
+        data=data,
+    )
     entry.add_to_hass(hass)
 
     await hass.config_entries.async_setup(entry.entry_id)
@@ -44,7 +50,10 @@ async def test_enhanced(hass, mock_nwsradar):
     """Test that nws setup with config yaml."""
     data = NWSRADAR_CONFIG.copy()
     data[CONF_STYLE] = "Enhanced"
-    entry = MockConfigEntry(domain=DOMAIN, data=data,)
+    entry = MockConfigEntry(
+        domain=DOMAIN,
+        data=data,
+    )
     entry.add_to_hass(hass)
 
     await hass.config_entries.async_setup(entry.entry_id)
@@ -62,7 +71,10 @@ async def test_mosaic(hass, mock_nwsradar_mosaic):
     data = NWSRADAR_CONFIG.copy()
     data[CONF_STYLE] = "Mosaic"
     data[CONF_TYPE] = ""
-    entry = MockConfigEntry(domain=DOMAIN, data=data,)
+    entry = MockConfigEntry(
+        domain=DOMAIN,
+        data=data,
+    )
     entry.add_to_hass(hass)
 
     await hass.config_entries.async_setup(entry.entry_id)

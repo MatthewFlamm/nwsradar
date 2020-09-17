@@ -22,7 +22,10 @@ async def test_camera(hass, mock_nwsradar_lite):
     instance.update = Mock(return_value=None)
     instance.image = Mock(return_value=b"Test")
 
-    entry = MockConfigEntry(domain=DOMAIN, data=NWSRADAR_CONFIG,)
+    entry = MockConfigEntry(
+        domain=DOMAIN,
+        data=NWSRADAR_CONFIG,
+    )
     entry.add_to_hass(hass)
     await hass.config_entries.async_setup(entry.entry_id)
     await hass.async_block_till_done()
@@ -46,7 +49,10 @@ async def test_camera_enhanced(hass, mock_nwsradar):
     instance.update = Mock(return_value=None)
     instance.image = Mock(return_value=b"Test")
 
-    entry = MockConfigEntry(domain=DOMAIN, data=NWSRADAR_CONFIG_ENHANCED,)
+    entry = MockConfigEntry(
+        domain=DOMAIN,
+        data=NWSRADAR_CONFIG_ENHANCED,
+    )
     entry.add_to_hass(hass)
     await hass.config_entries.async_setup(entry.entry_id)
     await hass.async_block_till_done()
@@ -70,7 +76,10 @@ async def test_camera_mosaic(hass, mock_nwsradar_mosaic):
     instance.update = Mock(return_value=None)
     instance.image = Mock(return_value=b"Test")
 
-    entry = MockConfigEntry(domain=DOMAIN, data=NWSRADAR_CONFIG_MOSAIC,)
+    entry = MockConfigEntry(
+        domain=DOMAIN,
+        data=NWSRADAR_CONFIG_MOSAIC,
+    )
     entry.add_to_hass(hass)
     await hass.config_entries.async_setup(entry.entry_id)
     await hass.async_block_till_done()

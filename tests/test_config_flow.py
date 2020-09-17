@@ -64,7 +64,8 @@ async def test_form(input_1, step_id_2, input_2, title, data, hass):
     with patch(
         "custom_components.nwsradar.async_setup", return_value=True
     ) as mock_setup, patch(
-        "custom_components.nwsradar.async_setup_entry", return_value=True,
+        "custom_components.nwsradar.async_setup_entry",
+        return_value=True,
     ) as mock_setup_entry:
         result2 = await hass.config_entries.flow.async_configure(
             result["flow_id"], {"style": input_1}
@@ -92,7 +93,8 @@ async def test_impory(hass):
     with patch(
         "custom_components.nwsradar.async_setup", return_value=True
     ) as mock_setup, patch(
-        "custom_components.nwsradar.async_setup_entry", return_value=True,
+        "custom_components.nwsradar.async_setup_entry",
+        return_value=True,
     ) as mock_setup_entry:
         result = await hass.config_entries.flow.async_init(
             DOMAIN,

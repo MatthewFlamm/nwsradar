@@ -39,7 +39,11 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 return await self.async_step_standard_enhanced()
             # Mosaic
             return await self.async_step_mosaic()
-        data_schema = vol.Schema({vol.Required(CONF_STYLE): vol.In(STYLES),})
+        data_schema = vol.Schema(
+            {
+                vol.Required(CONF_STYLE): vol.In(STYLES),
+            }
+        )
         return self.async_show_form(
             step_id="user", data_schema=data_schema, errors=errors
         )
