@@ -1,5 +1,7 @@
 # nwsradar
 
+> :warning: This integration is broken due to changes in NWS radar servers.
+
 Custom integration for NWS radar loops for Home Assistant.
 Radar stations can be found by clicking on this [map](https://radar.weather.gov/).
 
